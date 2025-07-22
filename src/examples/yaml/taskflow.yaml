@@ -1,0 +1,39 @@
+framework: pinet
+
+llms:
+  anthropic:
+    provider: anthropic
+    model: claude-3-opus-20240229
+    api_key: ANTHROPIC_API_KEY
+
+agents:
+    agent:
+        llm: anthropic
+        mcp: brave
+        supervisor: default
+
+taskflows:
+   flow1:
+      task1:
+        description: "Search for AI in healthcare 2025"
+        result: "list of 5 articles"
+        agent: agent
+        next_tasks:
+          more: task1
+          done: task2
+      task2:
+        description: "Search for AI in education 2025"
+        result: "list of 5 articles"
+        agent: agent
+      task3:
+        description: "write a report on the articles"
+        result: "report"
+        agent: agent
+          
+          
+
+     
+     
+      
+    
+  

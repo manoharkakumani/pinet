@@ -1,0 +1,33 @@
+framework: pinet
+
+llms:
+  anthropic:
+    provider: anthropic
+    model: claude-3-opus-20240229
+    api_key: ANTHROPIC_API_KEY
+mcps:
+  brave:
+    command: "npx -y @modelcontextprotocol/server-brave-search"
+    env:
+      BRAVE_API_KEY: BRAVE_API_KEY
+
+supervisors:
+  default:
+    strategy: one_for_one
+
+topic: Artificial Intelligence
+agents:
+  screenwriter:
+    description: "Skilled in crafting scripts with engaging dialogue about {topic}."
+    goal: Create scripts from concepts.
+    role: Screenwriter
+    llm: anthropic
+    supervisor: default
+
+taskflows:
+  scriptwriting_taskflow:
+    scriptwriting_task:
+      agent: screenwriter
+      description: "Develop scripts with compelling characters and dialogue about {topic}."
+      result: "Complete script ready for production."
+  

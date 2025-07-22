@@ -1,0 +1,22 @@
+framework: pinet
+
+topic: Climate Change
+
+llms:
+  anthropic:
+    provider: anthropic
+    model: claude-3-opus-20240229
+    api_key: "ANTHROPIC_API_KEY"
+
+agents:
+  researcher:
+    role: researcher
+    goal: "Researches assigned topic"
+    description: Climate analyst
+    llm: anthropic
+    tools:
+      wiki_summary: local
+    tasks:
+      climate_summary:
+        ask: "Summarize the topic {topic}"
+        

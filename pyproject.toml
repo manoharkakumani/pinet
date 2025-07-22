@@ -1,0 +1,80 @@
+[project]
+name = "pinet"
+version = "0.1.0"
+description = "Fault-Tolerant Multi-Agent AI System with LLM and MCP Integration"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Manohar Kakumani", email = "manoharkakumani@gmail.com" },
+]
+keywords = ["ai-agents", "actor-model", "fault-tolerance", "llm", "multi-agent", "distributed-systems", "mcp"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "aiohttp>=3.12.13",
+    "aiortc>=1.13.0",
+    "anthropic>=0.54.0",
+    "arxiv>=2.2.0",
+    "chromadb>=1.0.13",
+    "docx>=0.2.4",
+    "duckduckgo-search>=8.1.1",
+    "edge-tts>=7.0.2",
+    "fastapi>=0.115.14",
+    "faster-whisper>=1.1.1",
+    "fitz>=0.0.1.dev2",
+    "lxml-html-clean>=0.4.2",
+    "networkx>=3.2.1",
+    "newspaper3k>=0.2.8",
+    "numpy>=2.0.2",
+    "ollama>=0.5.1",
+    "openai>=1.0.0",
+    "pandas>=2.3.0",
+    "pint>=0.24.4",
+    "psutil>=7.0.0",
+    "pydantic>=2.11.7",
+    "pyjwt>=2.10.1",
+    "pytest>=8.4.0",
+    "pyyaml>=6.0",
+    "requests>=2.32.4",
+    "rich>=14.0.0",
+    "ruff>=0.11.13",
+    "sentence-transformers>=4.1.0",
+    "sounddevice>=0.5.2",
+    "soundfile>=0.13.1",
+    "speechrecognition>=3.14.3",
+    "uv>=0.7.17",
+    "uvicorn>=0.34.3",
+    "webrtcvad>=2.0.10",
+    "websocket>=0.2.1",
+    "websockets>=15.0.1",
+    "wikipedia>=1.4.0",
+]
+
+[project.scripts]
+pinet = "pinet.__main__:main"  # This enables `pinet` as a terminal command
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[project.urls]
+Homepage = "https://github.com/manoharkakumani/pinet"
+"Bug Tracker" = "https://github.com/manoharkakumani/pinet/issues"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pinet*"]
+namespaces = false

@@ -1,0 +1,15 @@
+# by default supervisor name is default is created and assigned to the roles with strategy one_for_one
+framework: pinet
+
+topic: Climate Change
+
+agents:
+  researcher:
+    description: Climate analyst
+    tools:
+      wiki_summary: local
+    tasks:
+      task1:
+        tool: wiki_summary
+        payload:
+          title: "Climate Change"

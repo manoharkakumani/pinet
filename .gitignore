@@ -1,0 +1,12 @@
+# Created by pytest automatically.
+
+.venv
+.pytest*
+pinet.*
+dist
+build   
+uv.lock
+.env
+./src/agent_data/*.json
+
+__pycache__

@@ -1,0 +1,21 @@
+framework: pinet
+
+llms:
+  anthropic:
+    provider: anthropic
+    model: claude-3-opus-20240229
+    api_key: ANTHROPIC_API_KEY
+
+agents:
+  voice_agent:
+    role: voice_agent
+    goal: "Responds to voice queries"
+    description: You are a voice agent
+    llm: anthropic
+    tools:
+      start_voice: local
+    tasks:
+      chat:
+        tool: start_voice
+        payload:
+          exit_word: "exit"

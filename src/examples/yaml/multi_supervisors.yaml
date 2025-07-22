@@ -1,0 +1,51 @@
+
+topic: "AI in 2025"
+
+llms:
+  anthropic:
+    provider: anthropic
+    model: claude-3-opus-20240229
+    api_key: "ANTHROPIC_API_KEY"
+
+mcps:
+  brave:
+    command: "npx -y @modelcontextprotocol/server-brave-search"
+    env:
+      BRAVE_API_KEY: "BRAVE_API_KEY"
+
+supervisors:
+  default:
+    strategy: one_for_one
+  manager:
+    strategy: one_for_all
+
+agents:
+  worker1:
+    role: researcher
+    goal: "Researches assigned topic"
+    description: "Researches assigned topic"
+    llm: anthropic
+    mcp: [brave]
+    supervisor: default
+
+  worker2:
+    role: researcher
+    goal: "Researches assigned topic"
+    description: "Researches assigned topic"
+    llm: anthropic
+    mcp: [brave]
+    supervisor: default
+
+  manager:
+    role: manager
+    goal: "Plans and coordinates tasks"
+    description: "Plans and coordinates tasks"
+    llm: anthropic
+    supervisor: default
+    team: [worker1, worker2]
+    tasks:
+      planning:
+        ask: "Break the topic {topic} into two research questions and assign one to each worker. and ask each worker to research their assigned topic."
+      summary:
+        ask: "Summarize the research done by the workers and provide a final report."
+        

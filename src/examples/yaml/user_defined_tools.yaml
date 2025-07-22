@@ -1,0 +1,30 @@
+# user defined tools in __pinet__.py in exec directory
+framework: pinet
+
+llms:
+  anthropic:
+    provider: anthropic
+    model: claude-3-opus-20240229
+    api_key: ANTHROPIC_API_KEY
+
+agents:
+  math_assistant:
+    description: You are a math assistant
+    role: assistant
+    goal: "be a math assistant"
+    llm: anthropic
+    memory:
+      enabled: true
+      memory:
+        type: json
+    tools:
+      add: local #user defined tool
+    tasks:
+      task1:
+        ask: "add the numbers 2 and 2"
+    
+        
+    
+        
+      
+

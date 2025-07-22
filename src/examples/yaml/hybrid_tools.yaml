@@ -1,0 +1,88 @@
+
+topic: "AI in 2025"
+
+llms:
+  anthropic:
+    provider: anthropic
+    model: claude-3-opus-20240229
+    api_key: "ANTHROPIC_API_KEY"
+
+mcps:
+  brave:
+    command: "npx -y @modelcontextprotocol/server-brave-search"
+    env:
+      BRAVE_API_KEY: "BRAVE_API_KEY"
+      
+supervisors:
+  default:
+    strategy: one_for_one
+
+agents:
+  manager:
+    description: "Plans and coordinates tasks"
+    llm: anthropic
+    memory:
+      enabled: true
+    supervisor: default
+    tasks:
+      planning:
+        type: ask
+        description: >
+          Break the topic "{topic}" into two research questions and assign one to each worker.
+
+      assign_worker1:
+        send:
+          to: worker1
+          type: tool
+          payload:
+            name: wiki_summary
+            payload:
+              title: "AI in finance 2025"
+
+      assign_worker2:
+        send:
+          to: worker2
+          type: tool
+          payload:
+            name: brave_web_search
+            payload:
+              query: "AI in transportation 2025"
+
+      ask_worker1:
+        send:
+          to: worker1
+          type: ask
+          payload: what did you find?
+
+      ask_worker2:
+        send:
+          to: worker2
+          type: ask
+          payload: what did you find?
+
+      summary:
+        type: ask
+        description: >
+          Summarize what each worker discovered about AI in 2025 based on your memory.
+
+  worker1:
+    description: "Researches finance"
+    llm: anthropic
+    mcp: [brave]
+    tools:
+      wiki_summary: local
+      brave_web_search: brave
+    memory:
+      enabled: true
+    supervisor: default
+
+  worker2:
+    description: "Researches transportation"
+    llm: anthropic
+    mcp: [brave]
+    tools:
+      wiki_summary: local
+      brave_web_search: brave
+    memory:
+      enabled: true
+    supervisor: default
